@@ -11,7 +11,7 @@ function slugFromUrl(url) {
   }
 }
 
-var defaultStyles = "\n  .peerpop-event-button { background-color: #000; color: #fff; padding: 10px 20px; border-radius: 5px; border: none; cursor: pointer; }\n  .peerpop-modal-overlay { position: fixed; inset: 0; background: rgb(37, 37, 37); display: flex; align-items: center; justify-content: center; z-index: 9999; }\n  .peerpop-modal-content { border-radius: 8px; width: 85vw; height: 85vh; max-width: 85vw; max-height: 85vh; overflow: hidden; display: flex; flex-direction: column; position: relative; }\n  .peerpop-modal-content iframe { border: none; width: 100%; height: 100%; min-height: 0; }\n  @media (max-width: 768px) { .peerpop-modal-content { width: 100vw; height: 100vh; max-width: none; max-height: none; border-radius: 0; } .peerpop-modal-content iframe { min-height: 100%; } }\n  .peerpop-modal-close { position: absolute; top: 12px; right: 12px; min-width: 48px; min-height: 48px; padding: 0; display: flex; align-items: center; justify-content: center; background: transparent; border: none; font-size: 28px; cursor: pointer; line-height: 1; color: #fff; z-index: 10000; -webkit-tap-highlight-color: transparent; }\n  .peerpop-modal-close:hover { color: #ccc; }\n";
+var defaultStyles = "\n  .peerpop-event-button { background-color: #000; color: #fff; padding: 10px 20px; border-radius: 5px; border: none; cursor: pointer; }\n  .peerpop-modal-overlay { position: fixed; inset: 0; background: rgb(37, 37, 37); display: flex; align-items: center; justify-content: center; z-index: 9999; }\n  .peerpop-modal-content { border-radius: 8px; width: 85vw; height: 85vh; max-width: 85vw; max-height: 85vh; overflow: hidden; display: flex; flex-direction: column; position: relative; }\n  .peerpop-modal-content iframe { border: none; width: 100%; height: 100%; min-height: 0; }\n  @media (max-width: 768px) { .peerpop-modal-content { width: 100vw; height: 100vh; max-width: none; max-height: none; border-radius: 0; } .peerpop-modal-content iframe { min-height: 100%; } }\n  .peerpop-modal-close { position: fixed; top: 12px; right: 12px; min-width: 48px; min-height: 48px; padding: 0; display: flex; align-items: center; justify-content: center; background: transparent; border: none; font-size: 28px; cursor: pointer; line-height: 1; color: #fff; z-index: 10001; -webkit-tap-highlight-color: transparent; touch-action: manipulation; pointer-events: auto; }\n  .peerpop-modal-close:hover { color: #ccc; }\n";
 
 function EventDisplayButton(props) {
   var url = props.url;
@@ -72,7 +72,16 @@ function EventDisplayButton(props) {
           type: "button",
           className: "peerpop-modal-close",
           "aria-label": "Close",
-          onClick: closeModal,
+          onClick: function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            closeModal();
+          },
+          onPointerDown: function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            closeModal();
+          },
         }, "\u00D7"),
         React.createElement(
           "div",

@@ -1,6 +1,6 @@
 {
   "name": "peerpop",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "PeerPop SDK",
   "main": "index.js",
   "files": ["index.js", "README.md", "react"],

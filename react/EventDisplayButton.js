@@ -11,7 +11,7 @@ function slugFromUrl(url) {
   }
 }
 
-var defaultStyles = "\n  .peerpop-event-button { background-color: #000; color: #fff; padding: 10px 20px; border-radius: 5px; border: none; cursor: pointer; }\n  .peerpop-modal-overlay { position: fixed; inset: 0; background: transparent; display: flex; align-items: center; justify-content: center; z-index: 9999; }\n  .peerpop-modal-content { border-radius: 8px; width: 85vw; height: 85vh; max-width: 85vw; max-height: 85vh; overflow: hidden; display: flex; flex-direction: column; position: relative; }\n  .peerpop-modal-content iframe { border: none; width: 100%; height: 100%; min-height: 0; z-index: 0; }\n  @media (max-width: 768px) { .peerpop-modal-content { width: 100vw; height: 100vh; max-width: none; max-height: none; border-radius: 0; } .peerpop-modal-content iframe { min-height: 100%; } }\n  .peerpop-modal-close-wrap { position: absolute; top: 0; right: 0; z-index: 9999999; display: flex; align-items: flex-start; justify-content: flex-end; min-width: 44px; min-height: 44px; }\n  @media (max-width: 768px) { .peerpop-modal-close-wrap { min-width: 88px; min-height: 88px; width: 88px; height: 88px; } }\n  .peerpop-modal-close { background: transparent; border: none; padding: 8px 12px; font-size: 24px; cursor: pointer; line-height: 1; color: #666; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }\n  .peerpop-modal-close:hover { color: #000; }\n";
+var defaultStyles = "\n  .peerpop-event-button { background-color: #000; color: #fff; padding: 10px 20px; border-radius: 5px; border: none; cursor: pointer; }\n  .peerpop-modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 9999; }\n  @media (max-width: 768px) { .peerpop-modal-overlay { align-items: flex-end; } }\n  .peerpop-modal-wrapper { position: relative; width: 85vw; height: 85vh; max-width: 85vw; max-height: 85vh; border-radius: 8px; overflow: hidden; }\n  @media (max-width: 768px) { .peerpop-modal-wrapper { width: 100vw; height: 90vh; max-width: none; max-height: none; border-radius: 12px 12px 0 0; } }\n  .peerpop-modal-content { position: absolute; inset: 0; overflow: hidden; z-index: 0; }\n  .peerpop-modal-content iframe { border: none; width: 100%; height: 100%; min-height: 0; }\n  .peerpop-modal-close-wrap { position: fixed; top: 12px; right: 12px; z-index: 9999999; display: flex; align-items: center; justify-content: center; min-width: 56px; min-height: 56px; pointer-events: auto; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }\n  @media (max-width: 768px) { .peerpop-modal-close-wrap { top: 2vh; right: 12px; min-width: 72px; min-height: 72px; width: 72px; height: 72px; } }\n  .peerpop-modal-close { background: transparent; border: none; padding: 0; font-size: 32px; cursor: pointer; line-height: 1; color: #fff; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }\n  @media (max-width: 768px) { .peerpop-modal-close { font-size: 40px; } }\n  .peerpop-modal-close:hover { color: #e0e0e0; }\n";
 
 function EventDisplayButton(props) {
   var url = props.url;
@@ -71,41 +71,45 @@ function EventDisplayButton(props) {
         React.createElement(
           "div",
           {
-            className: modalContentClass,
+            className: "peerpop-modal-close-wrap",
             onClick: function (e) {
               e.stopPropagation();
+              closeModal();
+            },
+            onPointerDown: function (e) {
+              e.preventDefault();
+              e.stopPropagation();
+              closeModal();
+            },
+            role: "button",
+            "aria-label": "Close",
+            tabIndex: 0,
+            onKeyDown: function (e) {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                closeModal();
+              }
             },
           },
+          React.createElement("span", { className: "peerpop-modal-close" }, "\u00D7")
+        ),
+        React.createElement(
+          "div",
+          { className: "peerpop-modal-wrapper" },
           React.createElement(
             "div",
             {
-              className: "peerpop-modal-close-wrap",
+              className: modalContentClass,
               onClick: function (e) {
                 e.stopPropagation();
-                closeModal();
-              },
-              onPointerDown: function (e) {
-                e.preventDefault();
-                e.stopPropagation();
-                closeModal();
-              },
-              role: "button",
-              "aria-label": "Close",
-              tabIndex: 0,
-              onKeyDown: function (e) {
-                if (e.key === "Enter" || e.key === " ") {
-                  e.preventDefault();
-                  closeModal();
-                }
               },
             },
-            React.createElement("span", { className: "peerpop-modal-close" }, "\u00D7")
-          ),
-          React.createElement("iframe", {
-            id: iframeId,
-            title: "Event",
-            src: url,
-          })
+            React.createElement("iframe", {
+              id: iframeId,
+              title: "Event",
+              src: url,
+            })
+          )
         )
       )
   );

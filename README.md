@@ -2,7 +2,7 @@
 
 The official [PeerPop](https://peerpop.io) Node.js SDK.
 
-V1 (1.1.7) offers event listing (past/upcoming) and webhook verification in one line.
+V1 (1.1.8) offers event listing (past/upcoming) and webhook verification in one line.
 
 For more information, see the [PeerPop SDK documentation](https://docs.peerpop.io/beta-features/peerpop-sdk).
 

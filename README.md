@@ -32,6 +32,12 @@ const past = await peerpop.events.list("past", userId, process.env.PEERPOP_API_K
 
 A button that opens a modal with an iframe showing your event URL (e.g. ticket or event page). Requires React 16.8+.
 
+### Live demo
+
+**[→ Try it in your browser](https://garrettwalter.github.io/peerpop-npm/)** — click “Get Tickets” to open the event in a modal (uses [this event](https://peerpop.io/event/wickedhalloweenparty+2025-10-30)).
+
+To run the demo locally: `cd examples/demo && npm install && npm run dev`, then open http://localhost:5173.
+
 **Props**
 
 | Prop           | Type   | Default        | Description                                                                 |
@@ -53,7 +59,7 @@ import EventDisplayButton from "peerpop/react";
 function App() {
   return (
     <EventDisplayButton
-      url="https://peerpop.io/event/atledmarttheultimateedmpaintandsipparty"
+      url="https://peerpop.io/event/wickedhalloweenparty+2025-10-30"
       buttonText="Get Tickets"
     />
   );
@@ -64,7 +70,7 @@ Or with custom classes:
 
 ```jsx
 <EventDisplayButton
-  url="https://peerpop.io/event/atledmarttheultimateedmpaintandsipparty"
+  url="https://peerpop.io/event/wickedhalloweenparty+2025-10-30"
   buttonText="Get Tickets"
   buttonStyles="my-btn-class"
   modalStyles="my-modal-class"

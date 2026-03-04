@@ -1,7 +1,7 @@
 import EventDisplayButton from "peerpop/react";
 
 const EVENT_URL =
-  "https://peerpop.io/event/wickedhalloweenparty+2025-10-30";
+  "https://peerpop.io/view/events/wickedhalloweenparty+2025-10-30";
 
 export default function App() {
   return (

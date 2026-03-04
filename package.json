@@ -1,13 +1,16 @@
 {
   "name": "peerpop",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "PeerPop SDK",
   "main": "index.js",
-  "files": ["index.js", "README.md"],
+  "files": ["index.js", "README.md", "react"],
   "scripts": {
     "test": "node test.js"
   },
-  "keywords": ["peerpop", "webhook", "verify", "signature"],
+  "keywords": ["peerpop", "webhook", "verify", "signature", "react", "events"],
   "license": "MIT",
-  "engines": { "node": ">=14" }
+  "engines": { "node": ">=14" },
+  "peerDependencies": {
+    "react": ">=16.8.0"
+  }
 }

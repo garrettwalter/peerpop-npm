@@ -2,7 +2,7 @@
 
 The official [PeerPop](https://peerpop.io) Node.js SDK.
 
-V1 (1.1.2) offers event listing (past/upcoming) and webhook verification in one line.
+V1 (1.1.3) offers event listing (past/upcoming) and webhook verification in one line.
 
 For more information, see the [PeerPop SDK documentation](https://docs.peerpop.io/beta-features/peerpop-sdk).
 
@@ -27,6 +27,54 @@ const past = await peerpop.events.list("past", userId, process.env.PEERPOP_API_K
 ```
 
 - **`peerpop.events.list(type, userId, apiKey)`** — `type` is `"upcoming"` or `"past"`. Returns a Promise that resolves to the API response (parsed JSON).
+
+## React: EventDisplayButton
+
+A button that opens a modal with an iframe showing your event URL (e.g. ticket or event page). Requires React 16.8+.
+
+**Props**
+
+| Prop           | Type   | Default        | Description                                                                 |
+|----------------|--------|----------------|-----------------------------------------------------------------------------|
+| `url`          | string | (required)     | Event URL to load in the iframe (e.g. ticket or event page).                |
+| `buttonText`   | string | `"Get Tickets"`| Label for the trigger button.                                               |
+| `buttonStyles` | string | —              | Optional CSS class name(s) for the button.                                  |
+| `modalStyles`  | string | —              | Optional CSS class name(s) for the modal content (the box around the iframe). |
+
+The modal is centered on desktop and full-screen on viewports ≤768px. The modal and iframe use an `id` derived from `url` for targeting.
+
+**Working example**
+
+Copy this into your React app. Clicking the button opens a modal with the live event page:
+
+```jsx
+import EventDisplayButton from "peerpop/react";
+
+function App() {
+  return (
+    <EventDisplayButton
+      url="https://peerpop.io/event/atledmarttheultimateedmpaintandsipparty"
+      buttonText="Get Tickets"
+    />
+  );
+}
+```
+
+Or with custom classes:
+
+```jsx
+<EventDisplayButton
+  url="https://peerpop.io/event/atledmarttheultimateedmpaintandsipparty"
+  buttonText="Get Tickets"
+  buttonStyles="my-btn-class"
+  modalStyles="my-modal-class"
+/>
+```
+
+```js
+// CommonJS
+const EventDisplayButton = require("peerpop/react");
+```
 
 ## Webhook verification
 
